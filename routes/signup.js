@@ -2,7 +2,7 @@ const router = require('express').Router();
 const User= require('../models/users');
 const express=require('express');
 const app = express();
-
+const passport  = require('passport');
 
 router.get('/', function(req,res){
      res.render('signup');
@@ -15,7 +15,7 @@ router.post('/' , (req,res,next)=>{
 
     
    User.findOne({$or:[{username:user},{email:email}]},function(err,USER){
-       console.log(USER.username);
+     //   console.log(USER.username);
         if(err){
              res.send(err);
         }
@@ -37,10 +37,17 @@ router.post('/' , (req,res,next)=>{
                     ERROR:"user save successfuly",
                     COLOR:'alert-success'
                   });
+                  
              });
+             
+             
+                 
         }
    });
-});
+},passport.authenticate( {
+     successRedirect:'/profile',
+     failureRedirect:"/signup"
+}));
 
 
 

@@ -54,7 +54,7 @@
               <div class="valid-feedback">valid.</div>
               <div class="invalid-feedback">please fill out this field</div>
             </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" id="login">login</button>
           </form>
             
         </div>
@@ -73,3 +73,26 @@
     {{{body}}}
   </body>
 </html>
+
+
+<script>
+  var $login = $('#login');
+  $login.on('click',function(event){
+    var uname= $('#uname').val();
+    var passw= $('#passw').val();
+    event.preventDefault();
+    $.ajax({
+      url:'/',
+      method:'post',
+      data:JSON.stringify({
+        username:uname,
+        password:passw
+      }),
+       contentType:'application/json; charset=utf-8'
+    });
+  });
+  
+
+
+
+</script>

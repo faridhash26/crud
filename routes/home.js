@@ -1,5 +1,5 @@
 const router = require('express').Router();
-
+var passport= require('passport');
 
 
 
@@ -8,6 +8,9 @@ const router = require('express').Router();
 router.get('/',function(req,res,neext){
     res.render("index");
 });
-module.exports=router;
-
+router.post('/' ,passport.authenticate("local",{
+    successRedirect:"/profile",
+    failureRedirect:"/"
+}
+));
 module.exports=router;
