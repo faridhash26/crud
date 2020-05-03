@@ -1,0 +1,75 @@
+<div class="container">
+    <h2>signin</h2>
+    <form>
+        <div class="form-group">
+            <div class="alert alert-info" id="alert">
+               please enter your information
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="username">
+                Username:
+            </label>
+            <input type="text" class="form-control" id="username" placeholder="Enter Username" name="uname">
+        </div>
+        <div class="form-goroup">
+            <label for="email">
+                Email:
+            </label>
+            <input type="email" class="form-control" id="email" placeholder="Enter Email" name="mail">
+        </div>
+        <div class="form-goroup">
+            <label for="pwd">
+                Password:
+            </label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+        </div>
+        <div class="form-goroup">
+            <label for="cppass">
+                reenter password:
+            </label>
+            <input type="password" class="form-control" id="cppass" placeholder="Enter password" name="pswd2">
+        </div>
+        <div class="form-group form-check">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary" id="register">Register</button>
+    </form>
+</div>
+
+
+
+
+
+
+<script>
+  var $register = $("#register");
+
+
+  $register.on('click' , function(event){
+      event.preventDefault();
+      var name = $('#username').val();
+      var mail = $('#email').val();
+      var pwd = $('#pwd').val();
+      var $id = $('#alert');
+      $.ajax({
+          url:'/signup',
+          method:'post',
+          data:JSON.stringify({
+              username:name,
+              email:mail,
+              password:pwd
+          }),
+          contentType:'application/json; charset=utf-8',
+          success:function(res){
+              
+              
+              $id.removeClass('alert-info').addClass(res.COLOR).text(res.ERROR);
+          }
+      });
+  });
+
+
+</script>
